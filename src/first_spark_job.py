@@ -29,27 +29,18 @@ print(f"20 partition :{df20.rdd.getNumPartitions()}")
 print("Number of partitions:", df.rdd.getNumPartitions())
 result = df.groupBy("region").sum("amount")
 
-result.show()
-result.explain()
 
-df4 = df.repartition(4)
+print("\n Records per partition:")
 
-print("Original partitions:", df.rdd.getNumPartitions())
-print("New partitions:", df4.rdd.getNumPartitions())
+for name,dataframe in [
+    ("1 partition", df1),
+    ("4 partitions", df4),
+    ("20 partitions", df20)]:
+    counts = (
+        dataframe.rdd
+        .mapPartitions(lambda rows: [sum(1 for _ in rows)])
+        .collect()
+    )
+    print(f"{name}: {counts}")
 
-print("Records per partition: 4")
-
-print(
-    df4.rdd
-       .mapPartitions(lambda rows: [sum(1 for _ in rows)])
-       .collect()
-)
-
-print("*******Partitions******* 1 ")
-
-print(
-    df.rdd
-       .mapPartitions(lambda rows: [sum(1 for _ in rows)])
-       .collect()
-)
 spark.stop()    
