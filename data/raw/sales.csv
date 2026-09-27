@@ -1,0 +1,11 @@
+order_id,customer_id,product,region,amount
+1,C001,Laptop,North,75000
+2,C002,Phone,South,45000
+3,C001,Mouse,North,1500
+4,C003,Keyboard,West,3000
+5,C002,Monitor,South,12000
+6,C001,Phone,North,42000
+7,C004,Laptop,East,78000
+8,C003,Mouse,West,1800
+9,C002,Laptop,South,82000
+10,C004,Phone,East,44000
